@@ -1,62 +1,83 @@
+
 # SiteLaunch
 
-A tool for deploying local websites to a public IP with ease. SiteLaunch takes your website running on `localhost` and makes it accessible to the public over the internet. Built using Go, Docker, and Bash, it simplifies web deployment on Linux environments.
+SiteLaunch is a lightweight tool to expose your local website or service to the public internet. It allows you to start and stop local services and forward them to a public-facing IP and port.
 
-## Project URL
-[https://github.com/qays3/SiteLaunch](https://github.com/qays3/SiteLaunch)
-
-## Features
-- Expose any local web server (e.g., `localhost:3000`) to a public IP.
-- Simple command-line interface for easy deployment.
-- Supports Linux environments for portability.
-- Automatically detects web services running on different ports.
-
-## Prerequisites
-- Docker
-- Go installed on your system
-- Linux-based OS
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Logging](#logging)
+- [Directory Structure](#directory-structure)
+- [Contributors](#contributors)
+- [Credits](#credits)
 
 ## Installation
 
+To set up the `SiteLaunch` tool, run the following commands:
+
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/qays3/SiteLaunch.git
-   ```
+    ```bash
+    git clone https://github.com/qays3/SiteLaunch.git
+    cd SiteLaunch
+    ```
 
-2. Navigate to the project directory:
-   ```bash
-   cd SiteLaunch
-   ```
+2. Make the `setup.sh` script executable and run it:
+    ```bash
+    chmod +x setup.sh
+    ./setup.sh
+    ```
 
-3. Build the Docker container:
-   ```bash
-   docker build -t sitelaunch .
-   ```
-
-4. Install Go dependencies:
-   ```bash
-   go mod tidy
-   ```
+This will install the required dependencies, set up permissions, and create the necessary log directories.
 
 ## Usage
 
-To make your local website accessible via a public IP, run the following command:
+### Running a Local Service
 
+To expose a local service to the public internet, use the following command:
 ```bash
-sitelaunch -w localhost:port deployment
+./sitelaunch <ip> <port> start
 ```
+- `<ip>`: Local IP address where the service is running.
+- `<port>`: Port on which the local service is running.
+- `start`: Command to start exposing the service.
 
-### Example
-For example, if your website is running on `localhost:8000`:
+For example:
 ```bash
-sitelaunch -w localhost:8000 deployment
+./sitelaunch 192.168.1.10 8080 start
 ```
 
-This command will take your local website and expose it to a public IP, allowing access from anywhere.
+### Stopping a Service
 
-## Folder Structure
-
+To stop a public service that was previously started, use the following command:
+```bash
+./sitelaunch <ip> <port> stop
 ```
+- `<ip>`: Local IP address where the service was running.
+- `<port>`: Port on which the local service was running.
+- `stop`: Command to stop the service.
+
+For example:
+```bash
+./sitelaunch 192.168.1.10 8080 stop
+```
+
+## Configuration
+
+All configurations are handled through the command-line arguments. No additional configuration files are needed.
+
+## Logging
+
+Service logs are automatically generated and stored in the `logs/sitelaunch.log` file. This log file records all the start and stop events for services.
+
+To view the log:
+```bash
+cat logs/sitelaunch.log
+```
+
+## Directory Structure
+
+```plaintext
 SiteLaunch/
 │
 ├── docker/
@@ -64,25 +85,32 @@ SiteLaunch/
 │   └── docker-compose.yml
 │
 ├── scripts/
-│   ├── start.sh          
-│   ├── deploy.sh         
-│   └── cleanup.sh        
+│   └── sitelaunch.sh
 │
-├── logs/                 
+├── logs/
 │   └── sitelaunch.log    
 │
-├── main.go     
-├── run.sh          
-├── .env                  
-└── README.md             
-
-
+├── main.go             
+├── setup.sh                 
+├── .env                
+└── README.md
 ```
 
-## Components
+- **docker/**: Contains the Docker setup for containerizing the tool.
+- **scripts/**: Contains the Bash script `sitelaunch.sh` used for starting and stopping services.
+- **logs/**: Stores the service logs.
+- **main.go**: The Go file that controls the tool and integrates with the Bash script.
+- **setup.sh**: The script to install dependencies and set up the tool.
 
-- **Docker**: Used to containerize the application for portability.
-- **Go**: Powers the core logic of the tool, handling web server communication and IP exposure.
-- **Bash Scripts**: Manages service startup, deployment, and cleanup operations.
+## Contributors
 
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <a href="https://github.com/qays3" style="text-decoration: none; display: flex; align-items: center;">
+        <img src="https://github.com/qays3.png" alt="@qays3" title="@qays3" width="100px" height="100px" style="border-radius: 50%; margin-right: 10px;">
+    </a>
+</div>
+
+## Credits
+
+[qays3](https://github.com/qays3) ([Support qays](https://buymeacoffee.com/hidden))
  

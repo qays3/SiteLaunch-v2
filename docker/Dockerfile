@@ -1,13 +1,9 @@
-FROM golang:1.20
+FROM golang:1.18
 
 WORKDIR /app
 
-COPY ./src /app/src
-COPY ./main.go /app
-COPY ./scripts /app/scripts
-COPY ./.env /app/.env
-COPY ./docker/docker-compose.yml /app/docker/docker-compose.yml
+COPY . .
 
 RUN go build -o sitelaunch main.go
 
-ENTRYPOINT ["./sitelaunch"]
+CMD ["./sitelaunch"]
