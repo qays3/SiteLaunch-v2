@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # SiteLaunch
 
@@ -114,3 +115,6 @@ SiteLaunch/
 
 [qays3](https://github.com/qays3) ([Support qays](https://buymeacoffee.com/hidden))
  
+=======
+# SiteLaunch-v2
+>>>>>>> 102a2f92d44d922dbb47a8e3aa35e1d02904ddf9
