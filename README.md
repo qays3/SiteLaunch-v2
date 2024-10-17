@@ -3,7 +3,7 @@
 **SiteLaunch** is a lightweight tool designed for network administrators to expose local websites or services to the public internet. It facilitates the starting and stopping of local services while forwarding them to a public-facing IP and port. This tool serves as a testing script to help in network management and service exposure.
 
 
-![alt text](img/SiteLaunch.png)
+![alt text](img/white-sitelaunch.png)
 
 
 
