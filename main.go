@@ -7,16 +7,19 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 5 {
-		log.Fatal("Usage: sitelaunch <ip> <port> <start|stop>")
+	if len(os.Args) != 4 {
+		log.Fatalf("Usage: %s <ip> <port> <start|stop>\n", os.Args[0])
 	}
-	ip := os.Args[1]
-	port := os.Args[2]
+
+	localIP := os.Args[1]
+	localPort := os.Args[2]
 	action := os.Args[3]
 
-	cmd := exec.Command("./scripts/sitelaunch.sh", ip, port, action)
-	err := cmd.Run()
-	if err != nil {
-		log.Fatalf("Error executing command: %v", err)
+	cmd := exec.Command("./scripts/sitelaunch.sh", localIP, localPort, action)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	if err := cmd.Run(); err != nil {
+		log.Fatalf("Error executing sitelaunch.sh: %v\n", err)
 	}
 }
